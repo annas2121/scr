@@ -1,6 +1,6 @@
 
 import { useState } from 'react'
-import { Routes, Route } from 'react-router-dom'
+import { Routes, Route, Link } from 'react-router-dom'
 import { FiHome, FiCalendar, FiUsers, FiSettings, FiDollarSign, FiPieChart } from 'react-icons/fi'
 import Dashboard from './components/Dashboard'
 import Properties from './components/Properties'
@@ -27,12 +27,12 @@ function App() {
           </button>
         </div>
         <nav className="mt-8">
-          <NavItem icon={<FiHome />} text="Dashboard" active={true} expanded={sidebarOpen} />
-          <NavItem icon={<FiCalendar />} text="Bookings" expanded={sidebarOpen} />
-          <NavItem icon={<FiUsers />} text="Guests" expanded={sidebarOpen} />
-          <NavItem icon={<FiDollarSign />} text="Properties" expanded={sidebarOpen} />
-          <NavItem icon={<FiPieChart />} text="Reports" expanded={sidebarOpen} />
-          <NavItem icon={<FiSettings />} text="Settings" expanded={sidebarOpen} />
+          <NavLink to="/" icon={<FiHome />} text="Dashboard" expanded={sidebarOpen} />
+          <NavLink to="/properties" icon={<FiDollarSign />} text="Properties" expanded={sidebarOpen} />
+          <NavLink to="/bookings" icon={<FiCalendar />} text="Bookings" expanded={sidebarOpen} />
+          <NavLink to="/guests" icon={<FiUsers />} text="Guests" expanded={sidebarOpen} />
+          <NavLink to="/reports" icon={<FiPieChart />} text="Reports" expanded={sidebarOpen} />
+          <NavLink to="/settings" icon={<FiSettings />} text="Settings" expanded={sidebarOpen} />
         </nav>
       </div>
 
@@ -53,12 +53,14 @@ function App() {
   )
 }
 
-const NavItem = ({ icon, text, active = false, expanded }) => {
+const NavLink = ({ to, icon, text, expanded }) => {
   return (
-    <div className={`flex items-center p-4 ${active ? 'bg-indigo-700' : 'hover:bg-indigo-700'} cursor-pointer`}>
-      <div className="text-xl">{icon}</div>
-      {expanded && <span className="ml-4">{text}</span>}
-    </div>
+    <Link to={to} className="block">
+      <div className={`flex items-center p-4 hover:bg-indigo-700 cursor-pointer`}>
+        <div className="text-xl">{icon}</div>
+        {expanded && <span className="ml-4">{text}</span>}
+      </div>
+    </Link>
   )
 }
 
